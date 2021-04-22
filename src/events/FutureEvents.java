@@ -35,7 +35,7 @@ public class FutureEvents<T> implements IEventQueue<T> {
     public static void test() {
         long start = System.currentTimeMillis();
 
-        IEventQueue<String> fortniteAbende = new FutureEvents<>();
+        IEventQueue<String> fortniteAbende = new HeapQueue<>();
         times.forEach(time -> fortniteAbende.enqueue(time, "Hey there"));
 
         Entry<String> event;
