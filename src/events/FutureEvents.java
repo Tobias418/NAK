@@ -27,13 +27,13 @@ public class FutureEvents<T> implements IEventQueue<T> {
 
     static {
         Random rnd = new Random();
-        for (int i = 0; i < 20000; i++) {
+        for (int i = 0; i < 100000; i++) {
             times.add(rnd.nextDouble() * 100);
         }
     }
 
     public static void test() {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
 
         IEventQueue<String> fortniteAbende = new HeapQueue<>();
         times.forEach(time -> fortniteAbende.enqueue(time, "Hey there"));
@@ -42,13 +42,20 @@ public class FutureEvents<T> implements IEventQueue<T> {
         while ((event = fortniteAbende.dequeue()) != null) {
         }
 
-        System.out.println(System.currentTimeMillis() - start + "ms");
+        System.out.println((System.nanoTime() - start) / 1000000f + "ms");
     }
 
     public static void main(String[] args) {
-        test();
-        test();
-        test();
-        test();
+        for (int i = 0; i < 10; i++) {
+
+            Experiment ex = new Experiment();
+            ex.initialize(0);
+            ex.evaluate(10);
+        }
+
+//        for (int i = 0; i < 10; i++) {
+//            test();
+////            System.gc();
+//        }
     }
 }
